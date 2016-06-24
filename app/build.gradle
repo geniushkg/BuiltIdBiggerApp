@@ -1,0 +1,41 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.3"
+    defaultConfig {
+        applicationId "com.udacity.gradle.builditbigger"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+    }
+    productFlavors {
+        free {
+            applicationId 'com.udacity.gradle.builditbigger.free'
+            versionCode 1
+            versionName '1.0.0'
+        }
+        paid {
+            applicationId 'com.udacity.gradle.builditbigger.paid'
+            versionCode 1
+            versionName '1.0.0'
+        }
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(':jokeandroidlib')
+    compile 'com.android.support:appcompat-v7:23.0.0-beta1'
+    compile 'com.google.firebase:firebase-ads:9.0.2'
+    compile project(path: ':backendApp', configuration: 'android-endpoints')
+}
